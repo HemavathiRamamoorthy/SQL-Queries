@@ -1,0 +1,24 @@
+--MS SQL server query to delete duplicate row
+------------------------------------------------
+Generic Query
+------------------------------------------------
+WITH CTE AS (
+    SELECT
+        column1, column2, column3, ..., columnN,
+        ROW_NUMBER() OVER (PARTITION BY column1, column2, column3, ..., columnN ORDER BY (SELECT 0)) AS RowNum
+    FROM
+        YourTable
+)
+DELETE FROM CTE WHERE RowNum > 1;
+
+--------------------------------------------
+Actual Query
+-------------------------------------------
+WITH CTE AS (
+    SELECT
+		source_attribute,source_value,target_attribute,target_value,
+        ROW_NUMBER() OVER (PARTITION BY source_attribute,source_value,target_attribute,target_value ORDER BY (SELECT 0)) AS RowNum
+    FROM
+        datamapping
+)
+DELETE FROM CTE WHERE RowNum > 1;
