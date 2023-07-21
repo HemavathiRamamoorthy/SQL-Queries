@@ -1,0 +1,10 @@
+##Oracle Qyery to get file size in bytes
+----------------------------------------
+SELECT SUM(DBMS_LOB.GETLENGTH(attachement)) AS total_blob_size
+FROM tp_attachment;
+
+
+##Oracle Qyery to get file size in MB
+----------------------------------------
+SELECT SUM(DBMS_LOB.GETLENGTH(attachement)) / 1048576 AS total_blob_size_mb
+FROM tp_attachment;
